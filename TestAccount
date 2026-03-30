@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class TestAccount {
+    public static void main(String[] args) {
+
+        Scanner input = new Scanner(System.in);
+
+        // Create account
+        System.out.print("Enter first name: ");
+        String firstName = input.nextLine();
+
+        System.out.print("Enter last name: ");
+        String lastName = input.nextLine();
+
+        System.out.print("Enter account ID: ");
+        int id = input.nextInt();
+
+        double rate = 1.5; // fixed interest rate
+        System.out.println("Interest Rate is fixed at 1.5%");
+
+        CheckingAccount acc = new CheckingAccount(rate);
+
+        acc.setFirstName(firstName);
+        acc.setLastName(lastName);
+        acc.setAccountID(id);
+
+        int choice;
+
+        do {
+            System.out.println("\n--- MENU ---");
+            System.out.println("1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Display Account");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+
+            choice = input.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter deposit amount: ");
+                    double deposit = input.nextDouble();
+                    acc.deposit(deposit);
+                    break;
+
+                case 2:
+                    System.out.print("Enter withdrawal amount: ");
+                    double withdraw = input.nextDouble();
+                    acc.processWithdrawal(withdraw);
+                    break;
+
+                case 3:
+                    acc.displayAccount();
+                    break;
+
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice.");
+            }
+
+        } while (choice != 4);
+
+        input.close();
+    }
+}
